@@ -5,9 +5,7 @@
 
 <tags:brutal-include value="footer"/>
 
-<!-- build:js /js/jquery.js -->	
-	<script src="/assets/js/deps/jquery.js"></script>
-<!-- endbuild -->
+<script src="${contextPath}/js/jquery.33331754.js"></script>
 
 <script type="text/javascript">
 	//UI flags (GLOBAL VARIABLES)
@@ -30,84 +28,23 @@
 	var MESSAGES_LOADER_URL = "${linkTo[MessagesController].loadMessages}";
 </script>
 
-<!-- build:js /js/jquery-plugins.js -->	
-	<script src="/assets/js/deps/diff_match_patch.js"></script>
-	<script src="/assets/js/deps/pretty-text-diff.js"></script>
-	<script src="/assets/js/deps/jquery.validate.min.js"></script>
-	<script src="/assets/js/deps/jquery.joyride-2.0.3.js"></script>
-	<script src="/assets/js/deps/select2.js"></script>
-
-	<script src="/assets/js/deps/picker.js"></script>
-	<script src="/assets/js/deps/picker.date.js"></script>
-    <script src="/assets/js/fileuploader.js"></script>
-    <script src="/assets/js/avatarupload.js"></script>
-
-    <script>window.FileAPI = { staticPath: '/assets/js/deps/fileapi/' };</script>
-    <script src="/assets/js/deps/fileapi/FileAPI.min.js"></script>
-<!-- endbuild -->
+<script src="${contextPath}/js/jquery-plugins.68e80200.js"></script>
 
 <c:set var="locale" value="${env.get('locale')}" />
 <c:choose>
 	<c:when test="${locale eq 'de'}">
-		<!-- build:js /js/jquery-plugin-translations-de.js -->
-			<script src="/assets/js/deps/translations/select2_locale_de.js"></script>
-			<script src="/assets/js/deps/translations/pickadate-de_DE.js"></script>
-		<!-- endbuild -->
+		<script src="${contextPath}/js/jquery-plugin-translations-de.c97c9e31.js"></script>
 	</c:when>
 	<c:when test="${locale eq 'pt-BR'}">
-		<!-- build:js /js/jquery-plugin-translations-pt_BR.js -->
-			<script src="/assets/js/deps/translations/select2_locale_pt-BR.js"></script>
-			<script src="/assets/js/deps/translations/pickadate-pt_BR.js"></script>
-		<!-- endbuild -->
+		<script src="${contextPath}/js/jquery-plugin-translations-pt_BR.9f9dd025.js"></script>
 	</c:when>
 </c:choose>
 
 <c:if test="${not env.supports('feature.inhouse.upload')}">
-	<!-- build:js /js/filepicker.js -->
-		<script src="/assets/js/deps/filepicker.js"></script>
-		<script src="/assets/js/deps/feather.js"></script>
-	<!-- endbuild -->
+	<script src="${contextPath}/js/filepicker.76a2bf19.js"></script>
 </c:if>
 
-<!-- build:js /js/mamute.js -->
-	<script src="/assets/js/deps/prettify.js"></script>
-	<script src="/assets/js/deps/Markdown.Converter.js"></script>
-	<script src="/assets/js/deps/Markdown.Sanitizer.js"></script>
-	<script src="/assets/js/deps/Markdown.Editor.js"></script>
-	<script src="/assets/js/deps/marked.js"></script>
-	<script src="/assets/js/messages.js"></script>
-	<script src="/assets/js/tags-manager.js"></script>
-	<script src="/assets/js/form-validation.js"></script>
-	<script src="/assets/js/form-hints.js"></script>
-	<script src="/assets/js/form-helper.js"></script>
-	<script src="/assets/js/simple-ajax-form.js"></script>
-	<script src="/assets/js/mark-as-solution.js"></script>
-	<script src="/assets/js/watch.js"></script>
-	<script src="/assets/js/form-markdown.js"></script>
-	<script src="/assets/js/hide-next.js"></script>
-	<script src="/assets/js/modal.js"></script>
-	<script src="/assets/js/up-down-vote.js"></script>
-	<script src="/assets/js/links-behaviour.js"></script>
-	<script src="/assets/js/history-select-version.js"></script>
-	<script src="/assets/js/submenu.js"></script>
-	<script src="/assets/js/popup.js"></script>
-	<script src="/assets/js/dropdown.js"></script>
-	<script src="/assets/js/order-by.js"></script>
-	<script src="/assets/js/share.js"></script>
-	<script src="/assets/js/diff.js"></script>
-	<script src="/assets/js/flag-it.js"></script>
-	<script src="/assets/js/more-comments.js"></script>
-	<script src="/assets/js/button-hints.js"></script>
-	<script src="/assets/js/answer-form.js"></script>
-	<script src="/assets/js/form-fix.js"></script>
-	<script src="/assets/js/about-banner.js"></script>
-	<script src="/assets/js/question-warnings.js"></script>
-	<script src="/assets/js/approve-news.js"></script>
-	<script src="/assets/js/ban-user.js"></script>
-	<script src="/assets/js/question-suggestions.js"></script>
-	<script src="/assets/js/delete-question.js"></script>
-	<script src="/assets/js/ip-blocker.js"></script>
-<!-- endbuild -->
+<script src="${contextPath}/js/mamute.c86a17b7.js"></script>
 
 <c:if test="${environment.supports('feature.analytics')}" >
 	<tags:brutal-include value="analytics"/>

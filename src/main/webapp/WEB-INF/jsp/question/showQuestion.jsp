@@ -15,7 +15,7 @@
 			${t['menu.questions']}
 		</a>
 	</span>
-	<span>»</span>
+	<span>ï¿½</span>
 	<span typeof="v:Breadcrumb">
 		<c:if test="${question.hasTags()}">
 			<a rel="v:url" property="v:title" href="${linkTo[ListController].withTag(question.mostImportantTag.name,1)}">
@@ -23,7 +23,7 @@
 			</a>
 		</c:if>
 	</span>
-	<span>»</span>
+	<span>ï¿½</span>
 	<span typeof="v:Breadcrumb">
 		<a rel="v:url" property="v:title" href="${linkTo[QuestionController].showQuestion(question, question.title)}">
 			<c:out value="${question.title}" escapeXml="true"/>
