@@ -15,7 +15,7 @@
 		<mamute.database>mysql</mamute.database>
 		<mamute.grunt.task>build</mamute.grunt.task>
 		<solr.version>4.10.0</solr.version>
-		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format> 
 	</properties>
 
 	<scm>
