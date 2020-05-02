@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <springProfile name="!prod">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>
+                    <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+                </Pattern>
+            </layout>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <timeZone>BET</timeZone>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="json"/>
+        </root>
+    </springProfile>
+
+</configuration>
