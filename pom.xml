@@ -53,6 +53,13 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- modules -->
+			<dependency>
+				<groupId>br.com.caelum</groupId>
+				<artifactId>infrastructure</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
 			<!-- Spring dependencies -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>

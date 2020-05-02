@@ -27,6 +27,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>br.com.caelum</groupId>
+			<artifactId>infrastructure</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>5.2.5.RELEASE</version>
