@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/log-level")
-public class LogLevelApplication {
+public class LogLevelController {
 
     /**
      * API para alterar o nivel de log do package informado de acordo com o nivel informado.
