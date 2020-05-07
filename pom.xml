@@ -191,17 +191,13 @@
 						<goals>
 							<goal>repackage</goal>
 						</goals>
+						<configuration>
+							<mainClass>br.com.caelum.mamute.Application</mainClass>
+							<excludeDevtools>true</excludeDevtools>
+							<executable>true</executable>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<mainClass>br.com.caelum.mamute.Application</mainClass>
-					<excludeDevtools>true</excludeDevtools>
-					<optimizedLaunch>true</optimizedLaunch>
-					<executable>true</executable>
-					<profiles>
-						<profile>production</profile>
-					</profiles>
-				</configuration>
 			</plugin>
 
             <!-- Formatter -->
