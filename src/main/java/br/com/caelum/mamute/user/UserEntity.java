@@ -1,15 +1,13 @@
 package br.com.caelum.mamute.user;
 
-import br.com.caelum.mamute.common.Information;
 import br.com.caelum.mamute.common.Votable;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 import br.com.caelum.mamute.infrastructure.sanitized.text.TextNormalizer;
+import br.com.caelum.mamute.infrastructure.schema.Schemas;
 import br.com.caelum.mamute.infrastructure.security.Digester;
-import br.com.caelum.mamute.moderator.Moderatable;
 import br.com.caelum.mamute.watch.Watcher;
 import lombok.Getter;
 import lombok.Setter;
-import status.UpdateStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,7 +27,7 @@ import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
 
 @Entity
 @Cacheable
-@Table(name = "Users")
+@Table(schema = Schemas.MAMUTE_DB, name = "Users")
 public class UserEntity {
 
     @Id
@@ -47,7 +45,7 @@ public class UserEntity {
     private String name;
 
     @Getter
-    @Size(min = WEBSITE_MIN_LENGTH, max = WEBSITE_MAX_LENGHT, message = WEBSITE_LENGTH_MESSAGE)
+    @Size(max = WEBSITE_MAX_LENGHT, message = WEBSITE_LENGTH_MESSAGE)
     private String website;
 
     @Getter
@@ -68,8 +66,6 @@ public class UserEntity {
 
     @Getter
     private boolean moderator = false;
-
-    private boolean confirmedEmail = false;
 
     private String forgotPasswordToken = "";
 
@@ -99,6 +95,7 @@ public class UserEntity {
     @Getter
     private boolean isBanned = false;
 
+    @Getter
     @OneToMany(mappedBy = "watcher")
     private final List<Watcher> watches = new ArrayList<>();
 
@@ -110,6 +107,7 @@ public class UserEntity {
     @Getter
     private boolean receiveAllUpdates = false;
 
+    @Getter
     private boolean deleted = false;
 
     static {
@@ -125,8 +123,7 @@ public class UserEntity {
     public UserSession newSession() {
         Long currentTimeMillis = System.currentTimeMillis();
         String sessionKey = Digester.encrypt(currentTimeMillis.toString() + this.id.toString());
-        UserSession userSession = new UserSession(this, sessionKey);
-        return userSession;
+        return new UserSession(this, sessionKey);
     }
 
     public void setName(SanitizedText name) {
@@ -218,10 +215,10 @@ public class UserEntity {
         return this;
     }
 
-    public boolean canModerate(EnvironmentKarma environmentKarma) {
+    /*public boolean canModerate(EnvironmentKarma environmentKarma) {
         long karma = environmentKarma.get(PermissionRules.MODERATE_EDITS);
         return isModerator() || this.karma >= karma;
-    }
+    }*/
 
     public String touchForgotPasswordToken() {
         String tokenSource = Math.random() + System.currentTimeMillis() + getEmail() + getId();
@@ -243,13 +240,13 @@ public class UserEntity {
         return true;
     }
 
-    public UpdateStatus approve(Moderatable moderatable, Information approvedInfo, EnvironmentKarma environmentKarma) {
+    /*public UpdateStatus approve(Moderatable moderatable, Information approvedInfo, EnvironmentKarma environmentKarma) {
         if (this.canModerate(environmentKarma)) {
             moderatable.approve(approvedInfo);
             approvedInfo.moderate(this, UpdateStatus.APPROVED);
         }
         return UpdateStatus.REFUSED;
-    }
+    }*/
 
     public void decreaseKarma(int value) {
         this.karma -= value;
@@ -257,10 +254,6 @@ public class UserEntity {
 
     public void increaseKarma(int value) {
         this.karma += value;
-    }
-
-    public void confirmEmail() {
-        confirmedEmail = true;
     }
 
     public void add(LoginMethod brutalLogin) {
@@ -271,15 +264,15 @@ public class UserEntity {
         return id == votable.getAuthor().getId();
     }
 
-    public boolean hasKarmaToAnswerOwnQuestion(EnvironmentKarma environmentKarma) {
+    /*public boolean hasKarmaToAnswerOwnQuestion(EnvironmentKarma environmentKarma) {
         long answerOwnQuestion = environmentKarma.get(PermissionRules.ANSWER_OWN_QUESTION);
         return (this.karma >= answerOwnQuestion) || isModerator();
-    }
+    }*/
 
-    public boolean hasKarmaToAnswerInactiveQuestion(EnvironmentKarma environmentKarma) {
+    /*public boolean hasKarmaToAnswerInactiveQuestion(EnvironmentKarma environmentKarma) {
         long answerInactiveQuestion = environmentKarma.get(PermissionRules.INACTIVATE_QUESTION);
         return (this.karma >= answerInactiveQuestion) || isModerator();
-    }
+    }*/
 
     public String getUnsubscribeHash() {
         return Digester.encrypt(this.email + Digester.hashFor(this.id));
