@@ -2,8 +2,8 @@ package br.com.caelum.mamute.user;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.MarkedText;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
@@ -13,11 +13,11 @@ import java.time.LocalDate;
 
 import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
 
-@Builder
+@NoArgsConstructor
 public class UserPersonalInfo {
 
     @Getter
-    private final UserEntity user;
+    private UserEntity user;
 
     @Getter
     @Size(min = NAME_MIN_LENGTH, max = NAME_MAX_LENGTH, message = NAME_LENGTH_MESSAGE)

@@ -84,6 +84,7 @@ public class UserEntity {
 
     public static final UserEntity GHOST;
 
+    @Setter
     @Getter
     @Size(min = EMAIL_MIN_LENGTH, max = EMAIL_MAX_LENGTH, message = EMAIL_LENGTH_MESSAGE)
     @Email(message = EMAIL_NOT_VALID)
@@ -116,6 +117,11 @@ public class UserEntity {
     }
 
     public UserEntity(SanitizedText name, String email) {
+        setName(name);
+        this.email = email;
+    }
+
+    public UserEntity(SanitizedText name, String email, String password) {
         setName(name);
         this.email = email;
     }
