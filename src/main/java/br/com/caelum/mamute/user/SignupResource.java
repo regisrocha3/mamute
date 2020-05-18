@@ -1,7 +1,9 @@
 package br.com.caelum.mamute.user;
 
+import br.com.caelum.mamute.common.BusinessValidation;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 
+import javax.validation.ValidationException;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 

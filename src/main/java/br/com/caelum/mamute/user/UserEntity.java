@@ -120,11 +120,6 @@ public class UserEntity {
         this.email = email;
     }
 
-    public UserEntity(SanitizedText name, String email, String password) {
-        setName(name);
-        this.email = email;
-    }
-
     public UserSession newSession() {
         Long currentTimeMillis = System.currentTimeMillis();
         String sessionKey = Digester.encrypt(currentTimeMillis.toString() + this.id.toString());

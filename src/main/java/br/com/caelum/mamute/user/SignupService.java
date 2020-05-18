@@ -1,5 +1,6 @@
 package br.com.caelum.mamute.user;
 
+import br.com.caelum.mamute.common.BusinessValidation;
 import br.com.caelum.mamute.infrastructure.log.LogException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class SignupService {
     private LoginMethodRepository loginMethodRepository;
 
     @LogException(exceptions = {Exception.class})
-    public UserEntity signup(UserEntity user) {
+    public UserEntity signup(final UserEntity user) {
         final UserEntity userPersisted = this.userRepository.save(user);
+
+        final BusinessValidation validLoginMethod = (loginMethod) -> {};
+        validLoginMethod.isEmpty(user.getLoginMethods());
+
         this.loginMethodRepository.save(userPersisted.getLoginMethods().get(FIRST_INDEX));
         return userPersisted;
     }
