@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "mamute_db", name = "tags")
+@Table(name = "tags")
 @Getter
 @Setter
 @RequiredArgsConstructor

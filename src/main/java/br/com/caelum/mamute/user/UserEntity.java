@@ -3,7 +3,6 @@ package br.com.caelum.mamute.user;
 import br.com.caelum.mamute.common.Votable;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 import br.com.caelum.mamute.infrastructure.sanitized.text.TextNormalizer;
-import br.com.caelum.mamute.infrastructure.schema.Schemas;
 import br.com.caelum.mamute.infrastructure.security.Digester;
 import br.com.caelum.mamute.watch.Watcher;
 import lombok.Getter;
@@ -27,13 +26,13 @@ import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
 
 @Entity
 @Cacheable
-@Table(schema = Schemas.MAMUTE_DB, name = "Users")
+@Table(name = "Users")
 public class UserEntity {
 
     @Id
     @Getter
     @Setter
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter

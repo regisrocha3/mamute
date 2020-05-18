@@ -2,17 +2,25 @@ package br.com.caelum.mamute.user;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 public class SignupResource {
 
+    @NotBlank(message = "{signup.message.validation.name}")
     @NotEmpty(message = "{signup.message.validation.name}")
     public String name;
-    //@NotEmpty(message = "{signup.message.validation.email}")
+
+    @NotBlank(message = "{signup.message.validation.email}")
+    @NotEmpty(message = "{signup.message.validation.email}")
     public String email;
-    //@NotEmpty(message = "{signup.message.validation.password}")
+
+    @NotBlank(message = "{signup.message.validation.password}")
+    @NotEmpty(message = "{signup.message.validation.password}")
     public String password;
-    //@NotEmpty(message = "{signup.message.validation.confirm.password}")
+
+    @NotBlank(message = "{signup.message.validation.confirm.password}")
+    @NotEmpty(message = "{signup.message.validation.confirm.password}")
     public String confirmPassword;
 
     public UserEntity toEntity() {
