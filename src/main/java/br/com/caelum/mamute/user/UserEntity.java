@@ -5,7 +5,9 @@ import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 import br.com.caelum.mamute.infrastructure.sanitized.text.TextNormalizer;
 import br.com.caelum.mamute.infrastructure.security.Digester;
 import br.com.caelum.mamute.watch.Watcher;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -27,6 +29,8 @@ import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
 @Entity
 @Cacheable
 @Table(name = "Users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
 
     @Id
