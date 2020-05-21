@@ -1,5 +1,6 @@
 package br.com.caelum.mamute.common;
 
+import br.com.caelum.mamute.user.UserEntity;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.validation.ValidationException;
@@ -16,9 +17,27 @@ public interface BusinessValidation {
         }
     }
 
-    default void isEmpty(Collection<?> collection) throws ValidationException {
+    default void isEmpty(final Collection<?> collection) throws ValidationException {
         if (CollectionUtils.isEmpty(collection)) {
             throw new ValidationException("Object are empty");
+        }
+    }
+
+    default void isEmpty(final Collection<?> collection, final String message) throws ValidationException {
+        if (CollectionUtils.isEmpty(collection)) {
+            throw new ValidationException(message);
+        }
+    }
+
+    default void isNull(final Object object, final String message) throws ValidationException {
+        if (object == null) {
+            throw new ValidationException(message);
+        }
+    }
+
+    default void isNotNull(final Object object, final String message) throws ValidationException {
+        if (object != null) {
+            throw new ValidationException(message);
         }
     }
 }

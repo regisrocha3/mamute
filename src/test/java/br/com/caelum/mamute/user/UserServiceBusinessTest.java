@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.validation.ValidationException;
 import java.util.List;
 
 @SpringBootTest
@@ -19,6 +20,34 @@ public class UserServiceBusinessTest {
 
     @Autowired
     private LoginMethodRepository loginMethodRepository;
+
+    @Test
+    public void testValidationEmailExists() {
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExists@email.com");
+        final LoginMethod loginMethod =
+                new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567", user);
+        user.add(loginMethod);
+
+        final UserEntity userCreated = this.signupService.signup(user);
+        Assertions.assertNotNull(userCreated.getId());
+
+        final UserEntity userDuplicated = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExists@email.com");
+        final LoginMethod loginMethodDuplicated =
+                new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567", user);
+        userDuplicated.add(loginMethodDuplicated);
+
+        Assertions.assertThrows(ValidationException.class, () -> {
+            this.signupService.signup(userDuplicated);
+        });
+    }
+
+    @Test
+    public void testValidationLoginMethodFilled() {
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com");
+        Assertions.assertThrows(ValidationException.class, () -> {
+            final UserEntity userCreated = this.signupService.signup(user);
+        }, "Login method is blank");
+    }
 
     @Test
     public void testCreateUser() {
