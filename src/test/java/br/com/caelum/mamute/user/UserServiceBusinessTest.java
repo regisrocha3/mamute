@@ -1,10 +1,15 @@
 package br.com.caelum.mamute.user;
 
+import br.com.caelum.mamute.Application;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ValidationException;
 import java.util.List;

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 
 @SpringBootTest
@@ -17,14 +16,14 @@ public class UserServiceValidationFieldsTest {
 
     @Test
     public void testAllEmptyFields() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
+        Assertions.assertThrows(ValidationException.class, () -> {
             signupService.signup(new UserEntity(SanitizedText.fromTrustedText(""), ""));
         });
     }
 
     @Test
     public void testEmailAndPasswordEmpty() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
+        Assertions.assertThrows(ValidationException.class, () -> {
             signupService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), ""));
         });
     }
