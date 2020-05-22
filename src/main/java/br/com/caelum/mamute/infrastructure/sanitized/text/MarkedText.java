@@ -5,20 +5,19 @@ import lombok.Getter;
 import lombok.ToString;
 
 @AllArgsConstructor
-@ToString(exclude = {"pure"})
+@ToString(exclude = { "pure" })
 public class MarkedText {
 
-	@Getter
-	private String pure;
-	@Getter
-	private String marked;
+    @Getter
+    private String pure;
+    @Getter
+    private String marked;
 
-	public static MarkedText pureAndMarked(String pure, String marked) {
-		return new MarkedText(pure, marked);
-	}
+    public static MarkedText pureAndMarked(String pure, String marked) {
+        return new MarkedText(pure, marked);
+    }
 
-	public static MarkedText notMarked(String pure) {
-		return new MarkedText(pure, pure);
-	}
+    public static MarkedText notMarked(String pure) {
+        return new MarkedText(pure, pure);
+    }
 }
-

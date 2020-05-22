@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 public class Watcher {
 
-	@Getter
+    @Getter
     @GeneratedValue
     @Id
     private Long id;
@@ -41,16 +41,18 @@ public class Watcher {
         active = true;
     }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Watcher watcher = (Watcher) o;
-		return Objects.equals(id, watcher.id);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Watcher watcher = (Watcher) o;
+        return Objects.equals(id, watcher.id);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

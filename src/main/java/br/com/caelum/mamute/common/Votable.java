@@ -8,12 +8,19 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface Votable {
-	void substitute(Vote previous, Vote current);
-	void remove(Vote previous);
-	UserEntity getAuthor();
-	Serializable getId();
-	long getVoteCount();
+    void substitute(Vote previous, Vote current);
+
+    void remove(Vote previous);
+
+    UserEntity getAuthor();
+
+    Serializable getId();
+
+    long getVoteCount();
+
     Class<? extends Votable> getType();
-	QuestionEntity getQuestion();
-	List<Vote> getVotes();
+
+    QuestionEntity getQuestion();
+
+    List<Vote> getVotes();
 }

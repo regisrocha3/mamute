@@ -21,18 +21,19 @@ public class SignupService {
     @Autowired
     private LoginMethodRepository loginMethodRepository;
 
-    @LogException(exceptions = {Exception.class})
+    @LogException(exceptions = { Exception.class })
     public UserEntity signup(final UserEntity user) {
         this.validate(user);
         final UserEntity userPersisted = this.userRepository.save(user);
-        final LoginMethod loginMethodCreated =
-                this.loginMethodRepository.save(userPersisted.getLoginMethods().get(FIRST_INDEX));
+        final LoginMethod loginMethodCreated = this.loginMethodRepository
+                .save(userPersisted.getLoginMethods().get(FIRST_INDEX));
 
         return userPersisted;
     }
 
     private void validate(final UserEntity user) {
-        final BusinessValidation validLoginMethod = (loginMethod) -> {};
+        final BusinessValidation validLoginMethod = (loginMethod) -> {
+        };
         validLoginMethod.isEmpty(user.getLoginMethods(), "Login method is blank");
 
         final UserEntity duplicateUserForEmail = this.userRepository.findUserByEmail(user.getEmail());

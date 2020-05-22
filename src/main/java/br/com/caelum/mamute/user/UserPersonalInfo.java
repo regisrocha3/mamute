@@ -34,7 +34,7 @@ public class UserPersonalInfo {
     private String website;
 
     @Getter
-	@Setter
+    @Setter
     @Size(max = LOCATION_MAX_LENGTH, message = LOCATION_LENGTH_MESSAGE)
     private String location;
 

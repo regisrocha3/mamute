@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @OpenAPIDefinition
-@RequestMapping(value = "/api/v1/signup", produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/signup", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public interface SignupApi {
 
-    @PostMapping("/")
+    @PostMapping
     ResponseEntity<Void> signup(@Valid @RequestBody SignupResource request);
 }

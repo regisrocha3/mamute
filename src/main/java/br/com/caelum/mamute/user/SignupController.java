@@ -20,9 +20,8 @@ class SignupController implements SignupApi {
     }
 
     private void validate(final SignupResource request) {
-        final BusinessValidation validationConfirmationPassword = (password) -> {};
-        validationConfirmationPassword.equals(request.password, request.confirmPassword);
-
-        // TODO: Verificar se usuario ja foi cadastrado
+        final BusinessValidation validationConfirmationPassword = (password) -> {
+        };
+        validationConfirmationPassword.equals(request.getPassword(), request.getConfirmPassword());
     }
 }

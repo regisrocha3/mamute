@@ -11,16 +11,17 @@ public interface Information {
     Object getId();
 
     boolean isPending();
-    
+
     UserEntity getAuthor();
-    
+
     Moderatable getModeratable();
+
     void setModeratable(Moderatable moderatable);
 
     String getTypeName();
-    
+
     boolean isBeforeCurrent();
 
-	void setInitStatus(UpdateStatus status);
+    void setInitStatus(UpdateStatus status);
 
 }

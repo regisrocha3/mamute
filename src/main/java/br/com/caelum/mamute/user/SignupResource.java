@@ -1,29 +1,32 @@
 package br.com.caelum.mamute.user;
 
-import br.com.caelum.mamute.common.BusinessValidation;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
+import lombok.*;
 
-import javax.validation.ValidationException;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignupResource {
 
     @NotBlank(message = "{signup.message.validation.name}")
-    @NotEmpty(message = "{signup.message.validation.name}")
-    public String name;
+    private String name;
 
     @NotBlank(message = "{signup.message.validation.email}")
-    @NotEmpty(message = "{signup.message.validation.email}")
-    public String email;
+    private String email;
 
     @NotBlank(message = "{signup.message.validation.password}")
-    @NotEmpty(message = "{signup.message.validation.password}")
-    public String password;
+    @Size(min = 6, max = 100, message = "{signup.errors.password.length}")
+    private String password;
 
     @NotBlank(message = "{signup.message.validation.confirm.password}")
-    @NotEmpty(message = "{signup.message.validation.confirm.password}")
-    public String confirmPassword;
+    private String confirmPassword;
 
     public UserEntity toEntity() {
         final UserEntity newUser = new UserEntity(SanitizedText.fromTrustedText(this.name), this.email);

@@ -24,16 +24,17 @@ public class UserServiceBusinessTest {
     @Test
     public void testValidationEmailExists() {
         final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExists@email.com");
-        final LoginMethod loginMethod =
-                new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567", user);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567",
+                user);
         user.add(loginMethod);
 
         final UserEntity userCreated = this.signupService.signup(user);
         Assertions.assertNotNull(userCreated.getId());
 
-        final UserEntity userDuplicated = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExists@email.com");
-        final LoginMethod loginMethodDuplicated =
-                new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567", user);
+        final UserEntity userDuplicated = new UserEntity(SanitizedText.fromTrustedText("Regis"),
+                "regisEmailExists@email.com");
+        final LoginMethod loginMethodDuplicated = new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com",
+                "1234567", user);
         userDuplicated.add(loginMethodDuplicated);
 
         Assertions.assertThrows(ValidationException.class, () -> {
@@ -52,8 +53,7 @@ public class UserServiceBusinessTest {
     @Test
     public void testCreateUser() {
         final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com");
-        final LoginMethod loginMethod =
-                new LoginMethod(MethodType.BRUTAL, "regis@email.com", "1234567", user);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, "regis@email.com", "1234567", user);
         user.add(loginMethod);
 
         final UserEntity userCreated = this.signupService.signup(user);

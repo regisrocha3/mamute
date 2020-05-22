@@ -1,7 +1,6 @@
 package br.com.caelum.mamute.infrastructure.controller.advice;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import br.com.caelum.mamute.user.ErrorDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,7 @@ import java.util.UUID;
 public class AppExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<ErrorDetails>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         final List<ErrorDetails> errors = new ArrayList<>();
 
@@ -34,14 +33,5 @@ public class AppExceptionHandler {
 
         errors.forEach(e -> log.error(e.toString()));
         return ResponseEntity.badRequest().body(errors);
-    }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class ErrorDetails {
-        public String message;
-        public String details;
-        public String correlationID;
-        public LocalDateTime timestamp;
     }
 }

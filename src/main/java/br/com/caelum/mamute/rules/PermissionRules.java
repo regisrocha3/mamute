@@ -21,8 +21,7 @@ public enum PermissionRules {
      */
     CREATE_FLAG("create_flag"),
 
-    EDIT_QUESTION("edit_question"),
-    EDIT_ANSWER("edit_answer"),
+    EDIT_QUESTION("edit_question"), EDIT_ANSWER("edit_answer"),
 
     /**
      * to comment anything

@@ -219,10 +219,10 @@ public class UserEntity {
         return this;
     }
 
-    /*public boolean canModerate(EnvironmentKarma environmentKarma) {
-        long karma = environmentKarma.get(PermissionRules.MODERATE_EDITS);
-        return isModerator() || this.karma >= karma;
-    }*/
+    /*
+     * public boolean canModerate(EnvironmentKarma environmentKarma) { long karma =
+     * environmentKarma.get(PermissionRules.MODERATE_EDITS); return isModerator() || this.karma >= karma; }
+     */
 
     public String touchForgotPasswordToken() {
         String tokenSource = Math.random() + System.currentTimeMillis() + getEmail() + getId();
@@ -244,13 +244,11 @@ public class UserEntity {
         return true;
     }
 
-    /*public UpdateStatus approve(Moderatable moderatable, Information approvedInfo, EnvironmentKarma environmentKarma) {
-        if (this.canModerate(environmentKarma)) {
-            moderatable.approve(approvedInfo);
-            approvedInfo.moderate(this, UpdateStatus.APPROVED);
-        }
-        return UpdateStatus.REFUSED;
-    }*/
+    /*
+     * public UpdateStatus approve(Moderatable moderatable, Information approvedInfo, EnvironmentKarma environmentKarma)
+     * { if (this.canModerate(environmentKarma)) { moderatable.approve(approvedInfo); approvedInfo.moderate(this,
+     * UpdateStatus.APPROVED); } return UpdateStatus.REFUSED; }
+     */
 
     public void decreaseKarma(int value) {
         this.karma -= value;
@@ -268,15 +266,17 @@ public class UserEntity {
         return id == votable.getAuthor().getId();
     }
 
-    /*public boolean hasKarmaToAnswerOwnQuestion(EnvironmentKarma environmentKarma) {
-        long answerOwnQuestion = environmentKarma.get(PermissionRules.ANSWER_OWN_QUESTION);
-        return (this.karma >= answerOwnQuestion) || isModerator();
-    }*/
+    /*
+     * public boolean hasKarmaToAnswerOwnQuestion(EnvironmentKarma environmentKarma) { long answerOwnQuestion =
+     * environmentKarma.get(PermissionRules.ANSWER_OWN_QUESTION); return (this.karma >= answerOwnQuestion) ||
+     * isModerator(); }
+     */
 
-    /*public boolean hasKarmaToAnswerInactiveQuestion(EnvironmentKarma environmentKarma) {
-        long answerInactiveQuestion = environmentKarma.get(PermissionRules.INACTIVATE_QUESTION);
-        return (this.karma >= answerInactiveQuestion) || isModerator();
-    }*/
+    /*
+     * public boolean hasKarmaToAnswerInactiveQuestion(EnvironmentKarma environmentKarma) { long answerInactiveQuestion
+     * = environmentKarma.get(PermissionRules.INACTIVATE_QUESTION); return (this.karma >= answerInactiveQuestion) ||
+     * isModerator(); }
+     */
 
     public String getUnsubscribeHash() {
         return Digester.encrypt(this.email + Digester.hashFor(this.id));
@@ -317,8 +317,10 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(id, that.id);
     }
@@ -328,4 +330,3 @@ public class UserEntity {
         return Objects.hash(id);
     }
 }
-
