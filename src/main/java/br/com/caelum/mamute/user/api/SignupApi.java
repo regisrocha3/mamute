@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.api;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.http.MediaType;

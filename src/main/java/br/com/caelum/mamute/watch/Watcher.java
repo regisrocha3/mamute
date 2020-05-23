@@ -1,6 +1,6 @@
 package br.com.caelum.mamute.watch;
 
-import br.com.caelum.mamute.user.UserEntity;
+import br.com.caelum.mamute.user.domain.UserEntity;
 import lombok.Getter;
 
 import javax.persistence.Entity;

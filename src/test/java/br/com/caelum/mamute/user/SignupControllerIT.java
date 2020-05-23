@@ -1,5 +1,7 @@
 package br.com.caelum.mamute.user;
 
+import br.com.caelum.mamute.infrastructure.api.data.ErrorDetails;
+import br.com.caelum.mamute.user.api.SignupResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;

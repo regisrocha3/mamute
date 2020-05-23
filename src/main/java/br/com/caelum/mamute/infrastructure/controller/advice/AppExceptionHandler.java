@@ -1,6 +1,6 @@
 package br.com.caelum.mamute.infrastructure.controller.advice;
 
-import br.com.caelum.mamute.user.ErrorDetails;
+import br.com.caelum.mamute.infrastructure.api.data.ErrorDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

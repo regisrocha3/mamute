@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.MarkedText;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
+import static br.com.caelum.mamute.user.domain.UserPersonalInfoValidator.*;
 
 @NoArgsConstructor
 public class UserPersonalInfo {

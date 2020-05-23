@@ -1,6 +1,10 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.controller;
 
 import br.com.caelum.mamute.common.BusinessValidation;
+import br.com.caelum.mamute.user.api.SignupResource;
+import br.com.caelum.mamute.user.api.SignupApi;
+import br.com.caelum.mamute.user.domain.UserEntity;
+import br.com.caelum.mamute.user.domain.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

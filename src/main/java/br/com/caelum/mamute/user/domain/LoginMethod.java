@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
+import static br.com.caelum.mamute.user.domain.UserPersonalInfoValidator.*;
 
 @Getter
 @Entity

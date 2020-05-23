@@ -1,6 +1,8 @@
 package br.com.caelum.mamute.user;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
+import br.com.caelum.mamute.user.domain.UserEntity;
+import br.com.caelum.mamute.user.domain.service.SignupService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

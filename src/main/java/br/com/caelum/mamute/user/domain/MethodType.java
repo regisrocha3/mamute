@@ -1,6 +1,7 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
 import br.com.caelum.mamute.infrastructure.security.Digester;
+import br.com.caelum.mamute.user.domain.LoginMethod;
 
 public enum MethodType {
     BRUTAL {

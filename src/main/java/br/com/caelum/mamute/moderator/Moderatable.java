@@ -3,7 +3,7 @@ package br.com.caelum.mamute.moderator;
 import br.com.caelum.mamute.common.Identifiable;
 import br.com.caelum.mamute.common.Information;
 import br.com.caelum.mamute.questions.QuestionEntity;
-import br.com.caelum.mamute.user.UserEntity;
+import br.com.caelum.mamute.user.domain.UserEntity;
 import status.UpdateStatus;
 
 public abstract class Moderatable implements Identifiable {

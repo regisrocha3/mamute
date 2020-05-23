@@ -1,15 +1,16 @@
 package br.com.caelum.mamute.user;
 
-import br.com.caelum.mamute.Application;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
+import br.com.caelum.mamute.user.domain.LoginMethod;
+import br.com.caelum.mamute.user.domain.MethodType;
+import br.com.caelum.mamute.user.domain.UserEntity;
+import br.com.caelum.mamute.user.domain.repository.LoginMethodRepository;
+import br.com.caelum.mamute.user.domain.repository.UserRepository;
+import br.com.caelum.mamute.user.domain.service.SignupService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ValidationException;
 import java.util.List;

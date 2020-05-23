@@ -1,7 +1,7 @@
 package br.com.caelum.mamute.common;
 
 import br.com.caelum.mamute.moderator.Moderatable;
-import br.com.caelum.mamute.user.UserEntity;
+import br.com.caelum.mamute.user.domain.UserEntity;
 import status.UpdateStatus;
 
 public interface Information {

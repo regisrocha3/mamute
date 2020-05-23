@@ -1,7 +1,7 @@
 package br.com.caelum.mamute.common;
 
 import br.com.caelum.mamute.questions.QuestionEntity;
-import br.com.caelum.mamute.user.UserEntity;
+import br.com.caelum.mamute.user.domain.UserEntity;
 import br.com.caelum.mamute.vote.Vote;
 
 import java.io.Serializable;

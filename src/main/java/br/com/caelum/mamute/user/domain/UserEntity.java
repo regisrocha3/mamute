@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
 import br.com.caelum.mamute.common.Votable;
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText.fromTrustedText;
-import static br.com.caelum.mamute.user.UserPersonalInfoValidator.*;
+import static br.com.caelum.mamute.user.domain.UserPersonalInfoValidator.*;
 
 @Entity
 @Cacheable

@@ -1,7 +1,11 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain.service;
 
 import br.com.caelum.mamute.common.BusinessValidation;
 import br.com.caelum.mamute.infrastructure.log.LogException;
+import br.com.caelum.mamute.user.domain.LoginMethod;
+import br.com.caelum.mamute.user.domain.UserEntity;
+import br.com.caelum.mamute.user.domain.repository.LoginMethodRepository;
+import br.com.caelum.mamute.user.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
+import br.com.caelum.mamute.user.domain.UserEntity;
 import lombok.Getter;
 
 import javax.persistence.*;

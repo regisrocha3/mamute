@@ -1,10 +1,10 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.api;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
+import br.com.caelum.mamute.user.domain.LoginMethod;
+import br.com.caelum.mamute.user.domain.UserEntity;
 import lombok.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

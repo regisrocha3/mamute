@@ -1,6 +1,5 @@
 package br.com.caelum.mamute.common;
 
-import br.com.caelum.mamute.user.UserEntity;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.validation.ValidationException;

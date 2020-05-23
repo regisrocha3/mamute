@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.user;
+package br.com.caelum.mamute.user.domain;
 
 import lombok.Getter;
 import lombok.Setter;
