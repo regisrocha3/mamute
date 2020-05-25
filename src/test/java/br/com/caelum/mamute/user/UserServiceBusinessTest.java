@@ -6,20 +6,19 @@ import br.com.caelum.mamute.user.domain.MethodType;
 import br.com.caelum.mamute.user.domain.UserEntity;
 import br.com.caelum.mamute.user.domain.repository.LoginMethodRepository;
 import br.com.caelum.mamute.user.domain.repository.UserRepository;
-import br.com.caelum.mamute.user.domain.service.SignupService;
+import br.com.caelum.mamute.user.domain.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.ValidationException;
 import java.util.List;
 
 @SpringBootTest
 public class UserServiceBusinessTest {
 
     @Autowired
-    private SignupService signupService;
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -29,30 +28,30 @@ public class UserServiceBusinessTest {
 
     @Test
     public void testValidationEmailExists() {
-        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExists@email.com");
-        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com", "1234567",
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regisEmailExistss@email.com");
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, "regisEmailExistss@email.com", "1234567",
                 user);
         user.add(loginMethod);
 
-        final UserEntity userCreated = this.signupService.signup(user);
+        final UserEntity userCreated = this.userService.signup(user);
         Assertions.assertNotNull(userCreated.getId());
 
         final UserEntity userDuplicated = new UserEntity(SanitizedText.fromTrustedText("Regis"),
-                "regisEmailExists@email.com");
-        final LoginMethod loginMethodDuplicated = new LoginMethod(MethodType.BRUTAL, "regisEmailExists@email.com",
+                "regisEmailExistss@email.com");
+        final LoginMethod loginMethodDuplicated = new LoginMethod(MethodType.BRUTAL, "regisEmailExistss@email.com",
                 "1234567", user);
         userDuplicated.add(loginMethodDuplicated);
 
-        Assertions.assertThrows(ValidationException.class, () -> {
-            this.signupService.signup(userDuplicated);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            this.userService.signup(userDuplicated);
         });
     }
 
     @Test
     public void testValidationLoginMethodFilled() {
         final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com");
-        Assertions.assertThrows(ValidationException.class, () -> {
-            final UserEntity userCreated = this.signupService.signup(user);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            final UserEntity userCreated = this.userService.signup(user);
         }, "Login method is blank");
     }
 
@@ -62,7 +61,7 @@ public class UserServiceBusinessTest {
         final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, "regis@email.com", "1234567", user);
         user.add(loginMethod);
 
-        final UserEntity userCreated = this.signupService.signup(user);
+        final UserEntity userCreated = this.userService.signup(user);
         Assertions.assertNotNull(userCreated);
         Assertions.assertNotNull(userCreated.getId());
         this.assertUserInfoTestCreateUser(userCreated);

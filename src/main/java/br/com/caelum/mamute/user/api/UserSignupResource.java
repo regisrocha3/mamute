@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignupResource {
+public class UserSignupResource {
 
     @NotBlank(message = "{signup.message.validation.name}")
     private String name;

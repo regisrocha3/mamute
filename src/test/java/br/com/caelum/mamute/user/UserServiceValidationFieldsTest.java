@@ -2,7 +2,7 @@ package br.com.caelum.mamute.user;
 
 import br.com.caelum.mamute.infrastructure.sanitized.text.SanitizedText;
 import br.com.caelum.mamute.user.domain.UserEntity;
-import br.com.caelum.mamute.user.domain.service.SignupService;
+import br.com.caelum.mamute.user.domain.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +14,26 @@ import javax.validation.ValidationException;
 public class UserServiceValidationFieldsTest {
 
     @Autowired
-    private SignupService signupService;
+    private UserService userService;
 
     @Test
     public void testAllEmptyFields() {
-        Assertions.assertThrows(ValidationException.class, () -> {
-            signupService.signup(new UserEntity(SanitizedText.fromTrustedText(""), ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            userService.signup(new UserEntity(SanitizedText.fromTrustedText(""), ""));
         });
     }
 
     @Test
     public void testEmailAndPasswordEmpty() {
-        Assertions.assertThrows(ValidationException.class, () -> {
-            signupService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            userService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), ""));
         });
     }
 
     @Test
     public void testLoginMethodEmpty() {
-        Assertions.assertThrows(ValidationException.class, () -> {
-            signupService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            userService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com"));
         });
     }
 }
