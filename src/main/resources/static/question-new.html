@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/app.css"/>
+    <link rel="stylesheet" href="styles/pagedown/editor.css"/>
+
+    <title>New Question | Mamute Q&A</title>
+    
+  </head>
+  <body>
+
+    <!-- TOP MENU -->
+    <nav class="navbar navbar-expand-lg navbar-light header sticky-top">
+        <a class="navbar-brand icon" href="index.html">
+            <img src="images/mamute-logo.JPG" width="200" alt="Mamute Q&A">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#rootMenu" aria-controls="rootMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="form-inline mx-auto search" action="question-unanswered-list.html" method="GET">
+                <div class="input-group has-feedback">
+                    <i class="fas fa-search form-control-feedback my-auto ml-3" aria-hidden="true"></i>
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </form>
+            <ul class="navbar-nav" id="rootMenu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-life-ring"></i> Help
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-comment"></i> About
+                    </a>
+                </li>
+                <li class="nav-item profile">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s3-us-west-2.amazonaws.com/token-daily-bucket/user-images/4a2359b48887048317100f5e5d28d0d6.jpeg"  class="rounded-circle w-5">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Options Menu -->
+    <div class="menu navbar navbar-expand-lg">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="question-unanswered-list.html">Unanswered</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">News</a>
+            </li>
+        </ul>
+        <a href="question-new.html" class="ask-question btn btn-primary" role="button" aria-pressed="true">Ask Question</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="main-content col-11 bg-white">
+                    <div class="section-title">
+                        <h5 data-bg-text="New Question">create</h5>
+                    </div>
+                    
+                    <div class="question-form row px-4">
+                        <form class="col-8" method="POST">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Title</span>
+                                </div>
+                                <input type="text" name="questionTitle" class="form-control" id="titleQuestion" required placeholder="A short title about your question">
+                            </div>
+                            <hr />
+                            <div class="editor-area">
+                                <div id="wmd-button-bar"></div>
+                                <textarea name="questionDescription" id="wmd-input" class="wmd-input form-control" required></textarea>
+                            </div>
+                            
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                            
+                            <hr />
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Attatchments</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Tags</span>
+                                </div>
+                                <input type="text" name="questionTags" class="form-control" id="tagQuestion" data-role="tags-input">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Send your question</button> &nbsp;
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="followTopic" class="form-check-input" checked id="customCheck1">
+                                <label class="form-check-label" for="customCheck1">Follow these topics via e-mail</label>
+                            </div>
+
+                            <br />
+                            <br />
+                            
+                        </form>
+                        <div class="col-4 question-help">
+                               <h5><b>How to ask</b></h5>
+                                <p>
+                                    <ul>
+                                        <li>
+                                            <b>Is your question about programming?</b> <br />
+                                            Ask questions that have an answer, avoid questions that only generate discussions. <br/>
+                                        
+                                            Provide details, share your research. <br/>
+                                        
+                                            For further details, read our faq.
+                                        </li>
+                                        <br />
+                                        <li>
+                                            <b>Is your question about internal proccess?</b> <br />
+                                            Ask questions that have an answer, avoid questions that only generate discussions. <br/>
+                                        
+                                            Provide details, share your research. <br/>
+                                        
+                                            For further details, read our faq.
+                                        </li>
+                                    </ul>
+                                    
+                                </p>
+                        </div>
+                    </div>
+                    
+            </div>
+            
+        <div class="clearfix">&nbsp;</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="credits">
+        <p>Mamute Q&A | Make with <i class="fa fa-heart primary"></i> and hosted in <a href="#">Github</a></p>
+        <p class="version">version: 2.0.0-SNAPSHOT</p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="scripts/pagedown/Markdown.Converter.js"></script>
+    <script src="scripts/pagedown/Markdown.Editor.js"></script>
+    <script src="scripts/pagedown/Markdown.Sanitizer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=desert"></script>
+    <script src="scripts/tags-input/jquery-tagsinput.min.js"></script>
+    <script>
+
+            $(document).ready(function() {
+                $('[data-role="tags-input"]').tagsInput();
+                var converter = Markdown.getSanitizingConverter();
+                converter.hooks.chain("postConversion", function(text){
+                    return text.replace(/<pre>/gi, "<pre class='prettyprint'>");
+                })
+
+                var handler = function(){
+                    alert("Help Clicked");
+                }
+
+                var helper = {"handler": handler, "title": "Help"}; // passar este objeto como 3o parametro no construtor abaixo para ver uma ajuda do editor
+
+                var editor = new Markdown.Editor(converter, "");
+                editor.hooks.chain("onPreviewRefresh", function() {
+                    PR.prettyPrint();
+                })
+                editor.run();
+            });
+
+            
+    </script>
+  </body>
+</html>

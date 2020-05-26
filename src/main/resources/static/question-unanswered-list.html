@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/app.css"/>
+
+    <title>Unanswared Questions | Mamute Q&A</title>
+
+  </head>
+  <body>
+
+    <!-- TOP MENU -->
+    <nav class="navbar navbar-expand-lg navbar-light header sticky-top">
+        <a class="navbar-brand icon" href="index.html">
+            <img src="images/mamute-logo.JPG" width="200" alt="Mamute Q&A">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#rootMenu" aria-controls="rootMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="form-inline mx-auto search" method="GET" action="question-unanswered-list.html">
+                <div class="input-group has-feedback">
+                    <i class="fas fa-search form-control-feedback my-auto ml-3" aria-hidden="true"></i>
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </div>
+            </form>
+            <ul class="navbar-nav" id="rootMenu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-life-ring"></i> Help
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-comment"></i> About
+                    </a>
+                </li>
+                <li class="nav-item profile">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://s3-us-west-2.amazonaws.com/token-daily-bucket/user-images/4a2359b48887048317100f5e5d28d0d6.jpeg"  class="rounded-circle w-5">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Options Menu -->
+    <div class="menu navbar navbar-expand-lg">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Questions</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="question-unanswered-list.html">Unanswered</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">News</a>
+            </li>
+        </ul>
+        <a href="question-new.html" class="ask-question btn btn-primary" role="button" aria-pressed="true">Ask Question</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="main-content col-8 bg-white">
+                    <div class="section-title">
+                        <h5 data-bg-text="Complete list">questions</h5>
+                    </div>
+                    
+                    <div class="quick-filters">
+                        <ul class="nav justify-content">
+                            <li class="nav-item pr-3">
+                                <div class="input-group mb-3 input-group-sm">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="quick-filter">
+                                          <i class="fa fa-search"></i>
+                                      </span>
+                                    </div>
+                                    <input type="text" name="quick-filter" class="form-control" placeholder="Search" aria-label="Filter" aria-describedby="quick-filter">
+                                  </div>
+                            </li>
+                            <li class="nav-item"><a class="nav-link active" href="#">most recent</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">most visited</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#advancedFilter" role="button" aria-expanded="false" aria-controls="advancedFilter">
+                                    advanced filter
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="advancedFilters">
+                            <div class="collapse" id="advancedFilter">
+                                <form method="GET" class="form-group">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p><strong>Filter by</strong></p>
+                                            <li>
+                                                <input class="form-check-input" type="checkbox" value="" id="filterNoAnswer" checked>
+                                                <label class="form-check-label" for="filterNoAnswer">no answers</label>
+                                            </li>
+                                            <li>
+                                                <input class="form-check-input" type="checkbox" value="" id="filterNoAcceptedAnswer">
+                                                <label class="form-check-label" for="filterNoAcceptedAnswer">no accepted answer</label>
+                                            </li>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><strong>Sorted by</strong></p>
+                                            <li>
+                                                <input class="form-check-input" name="sort" checked type="radio" value="" id="sortRecent">
+                                                <label class="form-check-label" for="sortRecent">most recent</label>
+                                            </li>
+                                            <li>
+                                                <input class="form-check-input" name="sort" type="radio" value="" id="sortVisited">
+                                                <label class="form-check-label" for="sortVisited">most visited</label>
+                                            </li>
+                                            <li>
+                                                <input class="form-check-input" name="sort" type="radio" value="" id="sortVoted">
+                                                <label class="form-check-label" for="sortVoted">most voted</label>
+                                            </li>
+                                        </div>
+                                        <div class="col-4 input-group-sm">
+                                            <p><strong>Tagged by</strong></p>
+                                            <input type="text" name="questionTags" placeholder="tags" class="form-control" id="tagQuestion" data-role="tags-input">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 pt-2">
+                                            <button type="submit" class="btn btn-primary btn-sm float-right">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                    <ul class="question-list">
+                        <li class="question">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5 class="title"><a class="secondary" href="question-detail.html">How to select the current date row from multiple date rows</a></h5>
+                                        <div class="tags">
+                                            <a class="badge badge-pill tag" href="#">c#</a>
+                                            <a class="badge badge-pill tag" href="#">data table</a>
+                                            <a class="badge badge-pill tag" href="#">bulk insert</a>
+                                        </div>
+                                        <div class="events">
+                                            <span class="event-type">
+                                                <i class="primary fas fa-pen"></i>
+                                            </span>
+                                            <span class="event-date">modified 2 mins ago</span>
+                                            <a href="#" class="event-author">Cristiano Almeida 5</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                        <span>1</span>
+                                        <span>votes</span>
+                                        <span><i class="fas fa-thumbs-up"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                        <span>0</span>
+                                        <span>answer</span>
+                                        <span><i class="fas fa-comment-alt"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                            <span>4</span>
+                                            <span>views</span>
+                                            <span><i class="fas fa-eye"></i></span>
+                                        </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
+
+                        <li class="question">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5 class="title"><a class="secondary" href="question-detail.html">Nullpoint at Spring Security filter</a></h5>
+                                        <div class="tags">
+                                            <a class="badge badge-pill tag" href="#">spring-security</a>
+                                        </div>
+                                        <div class="events">
+                                            <span class="event-type">
+                                                <i class="primary fas fa-file"></i>
+                                            </span>
+                                            <span class="event-date">created 5 mins ago</span>
+                                            <a href="#" class="event-author">Antonio Fernando 25</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                        <span>2</span>
+                                        <span>votes</span>
+                                        <span><i class="fas fa-thumbs-up"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                        <span>0</span>
+                                        <span>answer</span>
+                                        <span><i class="fas fa-comment-alt"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                            <span>10</span>
+                                            <span>views</span>
+                                            <span><i class="fas fa-eye"></i></span>
+                                        </div>
+                                </div>
+                            </div>
+                            <hr />
+                        </li>
+                        <li class="question">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h5 class="title"><a class="secondary" href="question-detail.html">Invalid data SQL Hibernate</a></h5>
+                                        <div class="tags">
+                                            <a class="badge badge-pill tag" href="#">jpa</a>
+                                            <a class="badge badge-pill tag" href="#">hibernate</a>
+                                            <a class="badge badge-pill tag" href="#">jee</a>
+                                        </div>
+                                        <div class="events">
+                                            <span class="event-type">
+                                                <i class="primary fas fa-file"></i>
+                                            </span>
+                                            <span class="event-date">created 12 mins ago</span>
+                                            <a href="#" class="event-author">Regis Adriano 50</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                        <span>8</span>
+                                        <span>votes</span>
+                                        <span><i class="fas fa-thumbs-up"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts answer">
+                                        <span>0</span>
+                                        <span>answer</span>
+                                        <span><i class="fas fa-comment-alt"></i></span>
+                                    </div>
+                                    <div class="col-1 question-counts">
+                                            <span>20</span>
+                                            <span>views</span>
+                                            <span><i class="fas fa-eye"></i></span>
+                                        </div>
+                                </div>
+                            </div>
+                            <hr />
+                        </li>
+                    </ul>
+                    
+                    <div class="btn-group pagination" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-light">
+                            <i class="fa fa-caret-left" ></i>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <i class="fa fa-angle-double-left" ></i>
+                        </button>
+                        <button type="button" class="btn btn-primary">1</button>
+                        <button type="button" class="btn btn-light">2</button>
+                        <button type="button" class="btn btn-light">3</button>
+                        <button type="button" class="btn btn-light">4</button>
+                        <button type="button" class="btn btn-light">
+                            <i class="fa fa-angle-double-right" ></i>
+                        </button>
+                        <button type="button" class="btn btn-light">
+                            <i class="fa fa-caret-right" ></i>
+                        </button>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+            </div>
+            <div class="side-content col-3">
+                    <div class="section-title">
+                        <h5 data-bg-text="Latest tech">news</h5>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <h5><a href="#">New feature in Java 14</a></h5>
+                                <span class="author">Regis Adriano</span>
+                                <div class="tags">
+                                    <a class="badge badge-pill tag" href="#">jdk</a>
+                                    <a class="badge badge-pill tag" href="#">java</a>
+                                </div>
+                            </li>
+                            <li>
+                                <h5><a href="#">Spring Boot 2.3.0 is available now</a></h5>
+                                <span class="author">Cristiano Almeida</span>
+                                <div class="tags">
+                                    <a class="badge badge-pill tag" href="#">spring-boot</a>
+                                </div>
+                            </li>
+                            <li>
+                                <h5><a href="#">NodeJS creator make a new JS runtime</a></h5>
+                                <span class="author">Antonio Fernando</span>
+                                <div class="tags">
+                                    <a class="badge badge-pill tag" href="#">node</a>
+                                    <a class="badge badge-pill tag" href="#">deno</a>
+                                    <a class="badge badge-pill tag" href="#">js</a>
+                                </div>
+                            </li>
+                            <li class="last">
+                                <a href="#">View all news ></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="section-title">
+                        <h5 data-bg-text="Hottest">tags</h5>
+                    </div>
+                    <div class="content">
+                            <div class="tags">
+                                    <a class="badge badge-pill tag" href="#">node</a>
+                                    <a class="badge badge-pill tag" href="#">java</a>
+                                    <a class="badge badge-pill tag" href="#">spring-boot</a>
+                                    <a class="badge badge-pill tag" href="#">spring-security</a>
+                                    <a class="badge badge-pill tag" href="#">nestjs</a>
+                                    <a class="badge badge-pill tag" href="#">liberty</a>
+                                    <a class="badge badge-pill tag" href="#">jee</a>
+                                    <a class="badge badge-pill tag" href="#">hibernate</a>
+                                    <a class="badge badge-pill tag" href="#">jpa</a>
+                                </div>
+                    </div>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="credits">
+        <p>Mamute Q&A | Make with <i class="fa fa-heart primary"></i> and hosted in <a href="#">Github</a></p>
+        <p class="version">version: 2.0.0-SNAPSHOT</p>
+    </footer>
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="scripts/tags-input/jquery-tagsinput.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('[data-role="tags-input"]').tagsInput();
+        });
+    </script>
+  </body>
+</html>
