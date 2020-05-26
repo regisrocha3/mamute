@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(schema = "mamute_db", name = "questions")
+@Table(name = "questions")
 @Data
 public class QuestionEntity implements Serializable {
 
