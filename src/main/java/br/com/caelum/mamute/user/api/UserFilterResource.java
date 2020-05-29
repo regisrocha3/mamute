@@ -17,7 +17,7 @@ public class UserFilterResource {
     public UserEntity toEntity() {
         final UserEntity entity = new UserEntity();
         entity.setEmail(this.email);
-        entity.setSluggedName(this.email);
+        entity.setSluggedName(this.sluggedName);
         entity.setName(SanitizedText.fromTrustedText(this.name));
         return entity;
     }
