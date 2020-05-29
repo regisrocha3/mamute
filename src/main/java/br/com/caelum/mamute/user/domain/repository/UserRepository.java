@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -22,31 +23,31 @@ public interface UserRepository extends CrudRepository<UserEntity, Long>, JpaSpe
     @Query(" FROM UserEntity u WHERE u.email=?1")
     UserEntity findUserByEmail(String email);
 
-    default public Specification<UserEntity> toSpecification(final UserFilterResource filter) {
+    default public Specification<UserEntity> toSpecification(final UserEntity filter) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             final List<Predicate> predicates = new ArrayList<>();
-            this.createCriteriaAndFilterName(root, criteriaQuery, criteriaBuilder, predicates, filter.getName());
-            this.createCriteriaAndFilterEmail(root, criteriaQuery, criteriaBuilder, predicates, filter.getEmail());
-            this.createCriteriaAndFilterSluggedName(root, criteriaQuery, criteriaBuilder, predicates, filter.getSluggedName());
-
+            if (filter != null) {
+                this.createCriteriaAndFilterName(root, criteriaQuery, criteriaBuilder, predicates, filter.getName());
+                this.createCriteriaAndFilterEmail(root, criteriaQuery, criteriaBuilder, predicates, filter.getEmail());
+                this.createCriteriaAndFilterSluggedName(root, criteriaQuery, criteriaBuilder, predicates,
+                        filter.getSluggedName());
+            }
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         };
     }
 
     private List<Predicate> createCriteriaAndFilterName(final Root<UserEntity> root,
-                                                        final CriteriaQuery<?> criteriaQuery,
-                                                        final CriteriaBuilder criteriaBuilder,
-                                                        final List<Predicate> predicates, final String name) {
+            final CriteriaQuery<?> criteriaQuery, final CriteriaBuilder criteriaBuilder,
+            final List<Predicate> predicates, final String name) {
         if (StringUtils.isNotBlank(name)) {
-            predicates.add(criteriaBuilder.equal(root.get("name"), name));
+            predicates.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
         }
         return predicates;
     }
 
     private List<Predicate> createCriteriaAndFilterEmail(final Root<UserEntity> root,
-                                                         final CriteriaQuery<?> criteriaQuery,
-                                                         final CriteriaBuilder criteriaBuilder,
-                                                         final List<Predicate> predicates, final String email) {
+            final CriteriaQuery<?> criteriaQuery, final CriteriaBuilder criteriaBuilder,
+            final List<Predicate> predicates, final String email) {
         if (StringUtils.isNotBlank(email)) {
             predicates.add(criteriaBuilder.equal(root.get("email"), email));
         }
@@ -54,9 +55,8 @@ public interface UserRepository extends CrudRepository<UserEntity, Long>, JpaSpe
     }
 
     private List<Predicate> createCriteriaAndFilterSluggedName(final Root<UserEntity> root,
-                                                               final CriteriaQuery<?> criteriaQuery,
-                                                               final CriteriaBuilder criteriaBuilder,
-                                                               final List<Predicate> predicates, final String sluggedName) {
+            final CriteriaQuery<?> criteriaQuery, final CriteriaBuilder criteriaBuilder,
+            final List<Predicate> predicates, final String sluggedName) {
         if (StringUtils.isNotBlank(sluggedName)) {
             predicates.add(criteriaBuilder.equal(root.get("sluggedName"), sluggedName));
         }
