@@ -1,0 +1,43 @@
+language: java
+sudo: false
+install: true
+
+# Set Branch that trigger CI Pipeline
+branches:
+  only:
+    - master-2.0
+# JDK Version
+jdk:
+  - openjdk11
+
+# Notification
+notifications:
+  slack:
+    secure: "rXS5GhPx3QApBOBKLu+HHUMCUhpIE+IUY9JdYafT9lWoTCBMAV1QzUUp1+FfZyRoKOwYpkhEWeep1Bp7nZXv6ENNNy6CvVpiE4YAJsW6jEW2TKL5o4CNsZF8iwa1VdYgbUJR9auLnQ9yHoITUY9akC3gcaMWxtx4Jd5lEI5RMtDJUV2pSz3jqdoyulIJR5hmpGPBkjFRXUQJdO+fEdh/nzhUQL0yeFOxfy489jbhKHroEE9hK9WUXUt8VCff/2XprnLRumSvyOU7M+8eXzfggiJsafi6UdP+GEOkU3fVITD6zMSfVFkm1Bd2oOB2AGEyDxOLU8ho/TFxpSYzVuWU3dXeVXHujJbJJ1nO/DJqD7qYGcKPCfvvbnyyAcAJMcENwVUDwONTy3a2gxtcGr9UB+gYaja+XhSPjT00xOUSDUri4AhcjtGkA4y3CXFuH9L5KVhwXnl6UqH5PDe4gVPpGRTslCjBQSglwuGssBXY3VH1cjvzlVwBit7SjfSqmHV0tw5Ti4XMRUTcsP+Fc0AycFUFegtkVkS1jxkPlUTopuXVWbBWSnTqtS/PktYwe8mdOo6bLt/LIeoDshe94GSOwozG5XZWQktfQTpjkRkkyX0vw/AgES+N0xT+E7Gbpmy01IJAy60DkSf2N8G6mjgzUa4MlQ9fEyFE0MzI1lOAnhg="
+    on_pull_requests: true
+    on_failure: always
+    on_success: always
+    if: branch == master-2.0
+    template:
+      - "Build %{repository_slug} #%{build_number} (%{result}): %{commit_subject} by %{author}"
+      - "Detalhes do build: %{build_url}"
+  email: false
+
+# Cache /.m2 to speed up builds
+cache:
+  directories:
+    - $HOME/.m2
+
+# Pré Build
+before_install:
+  - npm install -g snyk
+
+# Build Script
+script:
+  - mvn clean package
+
+# Post proccess after success build
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - snyk test
+  - snyk monitor
