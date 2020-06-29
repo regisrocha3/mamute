@@ -37,7 +37,7 @@ before_install:
 
 # Build Script
 script:
-  - mvnw clean package
+  - ./mvnw clean package
 
 # Post proccess after success build
 after_success:
