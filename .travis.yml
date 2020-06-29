@@ -42,5 +42,5 @@ script:
 # Post proccess after success build
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - snyk test --org=Mamute
-  - snyk monitor --org=Mamute
+  - snyk test --org=mamute
+  - snyk monitor --org=mamute
