@@ -1,3 +1,5 @@
+os: linux
+dist: trusty
 language: java
 sudo: false
 install: true
@@ -30,11 +32,12 @@ cache:
 
 # Pré Build
 before_install:
+  - chmod +x mvnw
   - npm install -g snyk
 
 # Build Script
 script:
-  - mvn clean package
+  - mvnw clean package
 
 # Post proccess after success build
 after_success:
