@@ -99,8 +99,11 @@ public class UserEntity {
 
     public void setName(SanitizedText name) {
         this.name = name.getText();
-        this.sluggedName = TextNormalizer.toSlug(this.name);
         this.nameLastTouchedAt = LocalDateTime.now();
+    }
+
+    public void setSluggedName(final String sluggedName) {
+        this.sluggedName = TextNormalizer.toSlug(sluggedName);
     }
 
     public void setPhotoUri(URL storedUri) {

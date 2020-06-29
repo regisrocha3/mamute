@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -68,6 +70,67 @@ public class UserServiceBusinessTest {
         this.assertLoginMethodInfoTestCreateUser(userCreated.getLoginMethods());
     }
 
+    @Test
+    public void testFindUserByName() {
+        final String EMAIL = "regis1@email.com";
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis"), EMAIL);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, EMAIL, "1234567", user);
+        user.add(loginMethod);
+
+        final UserEntity userCreated = this.userService.signup(user);
+        Assertions.assertNotNull(userCreated);
+        Assertions.assertNotNull(userCreated.getId());
+
+        final UserEntity filter = new UserEntity();
+        filter.setName(SanitizedText.fromTrustedText("Regis"));
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
+        Assertions.assertNotNull(userByFilter);
+        Assertions.assertEquals("Regis", userByFilter.getContent().get(0).getName());
+        Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());
+        Assertions.assertEquals(1, userByFilter.getTotalElements());
+    }
+
+    @Test
+    public void testFindUserByLikeName() {
+        final String EMAIL = "regis2@email.com";
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("XXXXXX yyasd UUUUUU"), EMAIL);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, EMAIL, "1234567", user);
+        user.add(loginMethod);
+
+        final UserEntity userCreated = this.userService.signup(user);
+        Assertions.assertNotNull(userCreated);
+        Assertions.assertNotNull(userCreated.getId());
+
+        final UserEntity filter = new UserEntity();
+        filter.setName(SanitizedText.fromTrustedText("yyasd"));
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
+        Assertions.assertNotNull(userByFilter);
+        Assertions.assertNotNull(userByFilter.getContent());
+        Assertions.assertEquals("XXXXXX yyasd UUUUUU", userByFilter.getContent().get(0).getName());
+        Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());
+        Assertions.assertEquals(1, userByFilter.getTotalElements());
+    }
+
+    @Test
+    public void testFindUserByEmail() {
+        final String EMAIL = "regis3@email.com";
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis 3"), EMAIL);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, EMAIL, "1234567", user);
+        user.add(loginMethod);
+
+        final UserEntity userCreated = this.userService.signup(user);
+        Assertions.assertNotNull(userCreated);
+        Assertions.assertNotNull(userCreated.getId());
+
+        final UserEntity filter = new UserEntity();
+        filter.setEmail(EMAIL);
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
+        Assertions.assertNotNull(userByFilter);
+        Assertions.assertEquals("Regis 3", userByFilter.getContent().get(0).getName());
+        Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());
+        Assertions.assertEquals(1, userByFilter.getTotalElements());
+    }
+
     private void assertLoginMethodInfoTestCreateUser(final List<LoginMethod> loginMethods) {
         loginMethods.forEach(l -> {
             final LoginMethod loginMethodFound = this.loginMethodRepository.findById(l.getId()).get();
@@ -83,5 +146,4 @@ public class UserServiceBusinessTest {
         Assertions.assertEquals("Regis", userFound.getName());
         Assertions.assertEquals("regis@email.com", userFound.getEmail());
     }
-
 }

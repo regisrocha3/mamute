@@ -30,7 +30,7 @@ class UserController implements UserApi {
 
     @Override
     public ResponseEntity<Page<UserResource>> find(final UserFilterResource request, final Pageable pageable) {
-        final Page<UserEntity> userSearch = this.userService.findUserByFilter(request, pageable);
+        final Page<UserEntity> userSearch = this.userService.findUserByFilter(request.toEntity(), pageable);
         final PageImpl<UserResource> response = new PageImpl<>(
                 UserResource.convertResponseFromUserEntity(userSearch.getContent()), userSearch.getPageable(),
                 userSearch.getTotalElements());

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.validation.ValidationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @SpringBootTest
 public class UserServiceValidationFieldsTest {
@@ -35,5 +35,14 @@ public class UserServiceValidationFieldsTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             userService.signup(new UserEntity(SanitizedText.fromTrustedText("Regis"), "regis@email.com"));
         });
+    }
+
+    @Test
+    public void testValidationPagingData() {
+        final int DEFAULT_PAGE_SIZE = 20;
+        final Page<UserEntity> response = this.userService.findUserByFilter(null, PageRequest.of(0, 20));
+        Assertions.assertNotNull(response);
+        Assertions.assertNotNull(response.getContent());
+        Assertions.assertEquals(DEFAULT_PAGE_SIZE, response.getSize());
     }
 }

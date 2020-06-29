@@ -1,8 +1,6 @@
 package br.com.caelum.mamute.user.domain.service;
 
 import br.com.caelum.mamute.infrastructure.log.LogException;
-import br.com.caelum.mamute.user.domain.LoginMethod;
-import br.com.caelum.mamute.user.domain.SearchCriteria;
 import br.com.caelum.mamute.user.domain.UserEntity;
 import br.com.caelum.mamute.user.domain.repository.LoginMethodRepository;
 import br.com.caelum.mamute.user.domain.repository.UserRepository;
@@ -21,6 +19,8 @@ import org.springframework.util.Assert;
 class UserServiceImpl implements UserService {
 
     private static final int FIRST_INDEX = 0;
+    private static final int DEFAULT_PAGE_SIZE = 20;
+    private static final String DEFAULT_FIELD_SORT = "name";
 
     @Autowired
     private UserRepository userRepository;
@@ -32,19 +32,19 @@ class UserServiceImpl implements UserService {
     public UserEntity signup(final UserEntity user) {
         this.validate(user);
         final UserEntity userPersisted = this.userRepository.save(user);
-        final LoginMethod loginMethodCreated = this.loginMethodRepository
-                .save(userPersisted.getLoginMethods().get(FIRST_INDEX));
-
+        this.loginMethodRepository.save(userPersisted.getLoginMethods().get(FIRST_INDEX));
         return userPersisted;
     }
 
     @Override
     @LogException(exceptions = { Exception.class })
-    public Page<UserEntity> findUserByFilter(SearchCriteria criteria, Pageable pageable) {
+    public Page<UserEntity> findUserByFilter(final UserEntity filter, final Pageable pageable) {
+        final PageRequest page = this.createPageRequest(pageable);
+        return this.userRepository.findAllUsers(filter, page);
+    }
 
-        final PageRequest page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.ASC);
-
-        return this.userRepository.findAll(criteria.toSpecification(), page);
+    private PageRequest createPageRequest(Pageable pageable) {
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.ASC, DEFAULT_FIELD_SORT);
     }
 
     private void validate(final UserEntity user) {
