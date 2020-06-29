@@ -1,4 +1,4 @@
-package br.com.caelum.mamute.infrastructure.controller.advice;
+package br.com.caelum.mamute.infrastructure.api.advice;
 
 import br.com.caelum.mamute.infrastructure.api.data.ErrorDetails;
 import lombok.extern.slf4j.Slf4j;

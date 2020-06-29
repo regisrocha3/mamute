@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class UserServiceBusinessTest {
 
         final UserEntity filter = new UserEntity();
         filter.setName(SanitizedText.fromTrustedText("Regis"));
-        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, null);
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
         Assertions.assertNotNull(userByFilter);
         Assertions.assertEquals("Regis", userByFilter.getContent().get(0).getName());
         Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());
@@ -102,7 +103,7 @@ public class UserServiceBusinessTest {
 
         final UserEntity filter = new UserEntity();
         filter.setName(SanitizedText.fromTrustedText("yyasd"));
-        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, null);
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
         Assertions.assertNotNull(userByFilter);
         Assertions.assertNotNull(userByFilter.getContent());
         Assertions.assertEquals("XXXXXX yyasd UUUUUU", userByFilter.getContent().get(0).getName());
@@ -123,7 +124,7 @@ public class UserServiceBusinessTest {
 
         final UserEntity filter = new UserEntity();
         filter.setEmail(EMAIL);
-        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, null);
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
         Assertions.assertNotNull(userByFilter);
         Assertions.assertEquals("Regis 3", userByFilter.getContent().get(0).getName());
         Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());

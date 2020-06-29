@@ -1,8 +1,9 @@
 package br.com.caelum.mamute.user.domain.repository;
 
-import br.com.caelum.mamute.user.api.UserFilterResource;
 import br.com.caelum.mamute.user.domain.UserEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -23,7 +23,11 @@ public interface UserRepository extends CrudRepository<UserEntity, Long>, JpaSpe
     @Query(" FROM UserEntity u WHERE u.email=?1")
     UserEntity findUserByEmail(String email);
 
-    default public Specification<UserEntity> toSpecification(final UserEntity filter) {
+    default Page<UserEntity> findAllUsers(final UserEntity filter, final Pageable pageable) {
+        return this.findAll(this.toSpecification(filter), pageable);
+    }
+
+    default Specification<UserEntity> toSpecification(final UserEntity filter) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             final List<Predicate> predicates = new ArrayList<>();
             if (filter != null) {
