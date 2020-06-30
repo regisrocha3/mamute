@@ -1,0 +1,46 @@
+os: linux
+dist: trusty
+language: java
+sudo: false
+install: true
+
+# Set Branch that trigger CI Pipeline
+branches:
+  only:
+    - master-2.0
+# JDK Version
+jdk:
+  - openjdk11
+
+# Notification
+notifications:
+  slack:
+    secure: "TU2aXS0Lg2dt581LV7q7dBFPDnV5dJmxOi+X+rvxANGOs2bMDX3EvSkwrC4l3+Blx67d0IfoPoGXPbSwzPvBt9f/ZwKbOkhhL2d9ofohubCXtGG20GVnVecTz+8WkfIBLlaHOYScrjHxgzWEOIfaZW5LhZRKG2ddlE4e+1snK4ws3ImkqBBfN/CZ+NVgH1EVy2cMubJ8OJ10dnJ1wJhO5JG/l4cUsddj/Ul4o7VOEPufcD0o1D3f5lwCn+yF3W249qICQZ4mvkVNwMd4fCczbcD8ucXPWB9RMWdO0tK+NmKtMq4jsZt2Kuhndc44IbBv2epxM+JkFt6jmjqNAeOPg4jY0NjebiwmvPjQV6ITpmPF1EiUv9tHD+BqNzkL6KSX0bxWB/mCDgc9IOT6Yvea6c25Hk+Dcmo3781B5FcQ9IlMN+666WGh+4I6NBAYVjHDK9mLVmjLr7p9/SQptkC+gIcC7ZcJ8pZPy7EI2iaUBNUHIiWEhhJSDL8UCo6Z1/QiP2merBeNoWS+X0EYoEV4hQsmj8O3Y307UhFx0ByMxIKx9fJ7M3cLEs+iytYcCoYDnl5ckiBJvLihy5kfjA760OXOI8GB+4kjUIoo3gvMpZwY3CBPqT1f2MG0Nfitfbyu+WUdyZ7eg2DtwHJUoy7qLYyFF89kDORWznLITUWss7U="
+    on_pull_requests: true
+    on_failure: always
+    on_success: always
+    if: branch == master-2.0
+    template:
+      - "Build %{repository_slug} #%{build_number} (%{result}): %{commit_subject} by %{author}"
+      - "Detalhes do build: %{build_url}"
+  email: false
+
+# Cache /.m2 to speed up builds
+cache:
+  directories:
+    - $HOME/.m2
+
+# Pré Build
+before_install:
+  - chmod +x mvnw
+  - npm install -g snyk
+
+# Build Script
+script:
+  - ./mvnw clean package
+
+# Post proccess after success build
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - snyk test --org=mamute
+  - snyk monitor --org=mamute
