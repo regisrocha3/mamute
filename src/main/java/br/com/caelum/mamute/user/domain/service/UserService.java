@@ -12,4 +12,6 @@ public interface UserService {
 
     Page<UserEntity> findUserByFilter(UserEntity filter,
             @NotNull(message = "{user.errors.pageable.required}") Pageable pageable);
+
+    void remove(String email);
 }

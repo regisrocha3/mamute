@@ -86,9 +86,9 @@ public class UserEntity {
     @ManyToOne
     private Attachment avatarImage;
 
-    private boolean receiveAllUpdates = false;
+    private boolean receiveAllUpdates;
 
-    private boolean deleted = false;
+    private boolean deleted;
 
     public UserEntity(SanitizedText name, String email) {
         this.name = name.getText();
