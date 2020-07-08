@@ -39,7 +39,7 @@ class UserController implements UserApi {
     }
 
     @Override
-    //@PreAuthorize("hasRole")
+    // @PreAuthorize("hasRole")
     public ResponseEntity<Void> remove(final String email) {
         this.userService.remove(email);
         return ResponseEntity.ok().build();
