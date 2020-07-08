@@ -38,6 +38,13 @@ class UserController implements UserApi {
         return ResponseEntity.ok(response);
     }
 
+    @Override
+    //@PreAuthorize("hasRole")
+    public ResponseEntity<Void> remove(final String email) {
+        this.userService.remove(email);
+        return ResponseEntity.ok().build();
+    }
+
     private void validate(final UserSignupResource request) {
         Assert.isTrue(request.getPassword().equals(request.getConfirmPassword()),
                 "Password and confirmPassword are not equals");

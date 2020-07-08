@@ -19,7 +19,6 @@ import org.springframework.util.Assert;
 class UserServiceImpl implements UserService {
 
     private static final int FIRST_INDEX = 0;
-    private static final int DEFAULT_PAGE_SIZE = 20;
     private static final String DEFAULT_FIELD_SORT = "name";
 
     @Autowired
@@ -41,6 +40,14 @@ class UserServiceImpl implements UserService {
     public Page<UserEntity> findUserByFilter(final UserEntity filter, final Pageable pageable) {
         final PageRequest page = this.createPageRequest(pageable);
         return this.userRepository.findAllUsers(filter, page);
+    }
+
+    @Override
+    @LogException(exceptions = { RuntimeException.class })
+    public void remove(final String email) {
+        final UserEntity userToDelete = this.userRepository.findUserByEmail(email);
+        userToDelete.setDeleted(true);
+        this.userRepository.save(userToDelete);
     }
 
     private PageRequest createPageRequest(Pageable pageable) {

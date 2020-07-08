@@ -131,6 +131,31 @@ public class UserServiceBusinessTest {
         Assertions.assertEquals(1, userByFilter.getTotalElements());
     }
 
+    @Test
+    public void testDeleteUser() {
+        final String EMAIL = "regis33@email.com";
+        final UserEntity user = new UserEntity(SanitizedText.fromTrustedText("Regis 3"), EMAIL);
+        final LoginMethod loginMethod = new LoginMethod(MethodType.BRUTAL, EMAIL, "1234567", user);
+        user.add(loginMethod);
+
+        final UserEntity userCreated = this.userService.signup(user);
+        Assertions.assertNotNull(userCreated);
+        Assertions.assertNotNull(userCreated.getId());
+
+        final UserEntity filter = new UserEntity();
+        filter.setEmail(EMAIL);
+        Page<UserEntity> userByFilter = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
+        Assertions.assertNotNull(userByFilter);
+        Assertions.assertEquals("Regis 3", userByFilter.getContent().get(0).getName());
+        Assertions.assertEquals(EMAIL, userByFilter.getContent().get(0).getEmail());
+        Assertions.assertEquals(1, userByFilter.getTotalElements());
+
+        this.userService.remove(EMAIL);
+        final Page<UserEntity> userRemoved = this.userService.findUserByFilter(filter, PageRequest.of(0, 1));
+        Assertions.assertNotNull(userRemoved);
+        Assertions.assertEquals(true, userRemoved.getContent().get(0).isDeleted());
+    }
+
     private void assertLoginMethodInfoTestCreateUser(final List<LoginMethod> loginMethods) {
         loginMethods.forEach(l -> {
             final LoginMethod loginMethodFound = this.loginMethodRepository.findById(l.getId()).get();

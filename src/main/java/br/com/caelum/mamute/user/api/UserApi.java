@@ -5,10 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,4 +18,7 @@ public interface UserApi {
 
     @GetMapping
     ResponseEntity<Page<UserResource>> find(UserFilterResource request, Pageable pageable);
+
+    @DeleteMapping("/{email}")
+    ResponseEntity<Void> remove(@PathVariable("email") String email);
 }
